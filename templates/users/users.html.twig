@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  OuiQuit - Utilisateurs
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1>
+      Liste des utilisteurs
+    </h1>
+    {% for user in users %}
+      <p>
+        {{ user.email }}
+      </p>
+    {% endfor %}
+  </div>
+{% endblock %}

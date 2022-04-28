@@ -14,18 +14,23 @@ class CallApiService
     }
 
     public function getBookData(): array
-
     {
         $header = [
-            'Authorization' => 'Bearer ' . 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NTA5MTA0OTAsImV4cCI6MTY1MDkxNDA5MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImVtYWlsIjoiZ2hpbGFyZGlsb2dhbkBnbWFpbC5jb20ifQ.XDjmkkL4Ac-Vdu-4cYJ6gsfK9b7UFAcBXtJBocI6olzJCFwg--_zDjkk-saE3mPmDVdD4GsCXwBDNTUVrlof8PeasV3qDbKvsrPUeLicbbfwbMeLBmWKHzOJLybUuSFzCKPvgMc8RjM1d8e193mA-S9dYJw-ksvQopeaYiTOrIU1VnFsN2fE8ldHc02eDI8h6zLcZ12EbqYl6p8aLdpv6tpzlqKcviym-lGh9EnHmfAMC_vwBcckfQoq7ZZmQt55qhTZNeHoPgwxMWo-mpo0pigki1injZtPwRByB5O_RVfwj5eAG2oPJgrZR7kA7h1rSaipyDo3AfvKGTFyyKPusB3tXTjxepILrt0Arj8UANVZyv9yzSjy-gqtExB9EpVBjZRTKdpucS_mW-7pMMyLKYt73fSKQ3jMoeaoG6lrs8sqiZeR9lxejkGelTNUBD86WfAcFqWvMmWIZasF1_pG9CJq9y47g7OEZrCMfRn2gJCZTPEix4t5uR34-byEZMxYNOlZeEPUyX6IF33i3LU9_4D5H6B6Alx5M_8QwC3Qt1nSoZ_qKisrZrlLH_KfIG5UlKZQqlh3Vc21P4KhKY0EFL63_XqKF9q_vXgBQ7dK6fIIVz--NtX884esYdvdAcqG_NhiPvDYmoe2Qs-PgxrYTriWzndgKDZ_IFWAl4TrFtw',
+            'Authorization' =>
+                'Bearer ' .
+                'eyJ0eXAiOiJKV1QiLCJhbGciOiJSzI1NiJ9.eyJpYXQiOjE2NTA5MTUzMzIsImV4cCI6MTY1MDkxODkzMiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImVtYWlsIjoiZ2hpbGFyZGlsb2dhbkBnbWFpbC5jb20ifQ.VWq2c7duqUkc5h1r47_4iejQ5Kdn17ocnOOitVcj3dCP_8hU_NzhihNBjRUeopQwIYPfcDgb3U7Hpty-ZxYQr7PmW9GD8DfsKQt86VwlTyuKOgGqGpnLs0ZyxlKJTuBWNOGoVn9dO4mpAiesPo4pCXjvPiKb06206hAiteKCPwaHtTY7F-RWXn1DIKSvTnsbM7oCL260h8lBK4usza-dNj-9QVbf7Mnfhvd_FYsiJPhg2-EcaIsYTEonbKhKE5FQ-k8qbKpXxuJdc7uK-tzVNLjlI8eZ2QRCF339mu5k79WYZqSvexsn1mDnTSaKHAwbMMoIdajt-tj8JAo4GiUtlCE21n9dIZDYm4dsl-s0l7lhYaspjawuK9Yyk_aXrxnFRtKnT_14ug7a_P_smppQTKsiqe9DU59wxO_5PBluFOKKT5B3uX0nMHmYujHM2oAOApelR6Ivg1ZbOhGdFOd0QO9KRNQT-ipoFMU8Voh1MGajZIIzgjWa4brMbOkN9CZDSbpWkNTf8AYe4OKPQ3iZK1wQkjUHBawg6bhKHtuO4_GGQy0vpAIoaJ0f0LUvIMT0EFzDStiPYcnsHYvifPS9h8nT7EGVQUkEuXvDp1ISQM0cvTVjVFeA1VonSiVwtU04sWqxsIHRM4-TDw2vzX2pJrFkPVhI5bsDI0UAzwx_bTc',
             'Accept' => 'application/json',
         ];
-        $response = $this->client->request(
-            'GET',
-            'http://127.0.0.1:8001/api/users',
-            ['headers' => $header]
-        );
+        try {
+            $response = $this->client->request(
+                'GET',
+                'http://127.0.0.1:8000/api/users',
+                ['headers' => $header]
+            );
 
-        return $response->toArray();
+            return $response->toArray();
+        } catch (\Exception $e) {
+            return [];
+        }
     }
 }

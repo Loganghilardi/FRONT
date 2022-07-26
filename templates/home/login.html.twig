@@ -1,29 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}OuiQuit - Login{% endblock %}
+{% block title %}OuiQuit - Connexion{% endblock %}
 {% block stylesheets %}
+    {{ encore_entry_link_tags('navbar') }}
     {{ encore_entry_link_tags('login') }}
+    {{ encore_entry_link_tags('alerts') }}
 {% endblock %}
-{% block flashes %}
-    {% for label, messages in app.flashes(['success', 'warning', 'danger']) %}
-        {% for message in messages %}
-            <div class="alert alert-dismissible alert-{{ label }}">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-{% endblock %}
-{% block body %}
+
+{% block container %}
     <div class="container">
       {{ form_start(form,  {'attr': {'id': 'main'}})}}
-      <h2>Login to your account</h2>
+      <h2>Connexion à l'admin</h2>
 
-        
-        
-        
-        
-        
             <div class="input-parent">{{ form_widget(form.username) }}
             </div>
 

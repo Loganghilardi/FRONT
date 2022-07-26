@@ -7,36 +7,40 @@ use App\Service\AuthApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-
 
 class LoginController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function login(AuthApiService $authApiService, Request $request): Response
-    {               
+    public function login(
+        AuthApiService $authApiService,
+        Request $request
+    ): Response {
         $success = false;
-        
+
         $form = $this->createForm(LoginType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $success = $authApiService->getToken($form->getData());
+            $success = $authApiService->login($form->getData());
 
-            } catch (\Exception $e) {
-                throw new BadRequestHttpException('Invalid credentials');
-            }
             if ($success) {
+                $this->addFlash('success', 'Vous êtes connectés!');
+
                 return $this->redirectToRoute('users');
+            } else {
+                $this->addFlash(
+                    'error',
+                    'Vos identifiants ne sont pas valides!'
+                );
+                return $this->render('home/login.html.twig', [
+                    'form' => $form->createView(),
+                ]);
             }
         }
 
         return $this->render('home/login.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 }

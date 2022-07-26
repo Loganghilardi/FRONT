@@ -4,15 +4,17 @@
   OuiQuit - Utilisateurs
 {% endblock %}
 
-{% block body %}
+{% block container %}
   <div class="container">
     <h1>
-      Liste des utilisteurs
+      Liste des utilisateurs
     </h1>
     {% for user in users %}
       <p>
         {{ user.email }}
       </p>
+      {{dump (user)}}
+      <p> {{ user.id }} {{ user.roles[0] }} </p>
     {% endfor %}
   </div>
 {% endblock %}

@@ -11,7 +11,9 @@
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
-      {{ encore_entry_link_tags('app') }}
+      	{{ encore_entry_link_tags('app') }}
+		{{ encore_entry_link_tags('navbar') }}
+		{{ encore_entry_link_tags('alerts') }}
     {% endblock %}
 
     {% block javascripts %}
@@ -20,36 +22,47 @@
   </head>
   <body>
     {% block header %}
-      <div class="example-wrapper">
-        <div class="nav">
-          <input type="checkbox" id="nav-check" />
-          <div class="nav-header">
-            <div class="nav-title">
-              OuiQuit
-            </div>
-          </div>
-          <div class="nav-btn">
-            <label for="nav-check">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-          </div>
-          {% if app.session.get('token') %}
-            <div class="nav-links">
-              <a href="{{ path('users') }}">Utilisateurs</a>
-              <a href="{{ path('logout') }}">Déconnexion</a>
-            </div>
-          {% else %}
-            <div class="nav-links">
-              <a href="{{ path('login') }}">Connexion</a>
-            </div>
-          {% endif %}
+      <nav class="navbar">
+        <a href="{{ path('app_home') }}" class="logo">OuiQuit</a>
+        <input type="checkbox" id="toggler" />
+        <label for="toggler"><i class="ri-menu-line"></i></label>
+        <div class="menu">
+          <ul class="list">
+            {% if app.session.get('token') %}
+            	<li>
+                	<a href="{{ path('users') }}">Utilisateurs</a>
+                </li>
+                <li>
+                  <p> {{ app.session.get('username') }}</p>
+                </li>
+                <li>
+                  <a href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+              </div>
+            {% else %}
+				<li>
+                	<a href="{{ path('login') }}">Connexion</a>
+             	</li>
+            {% endif %}
+          </ul>
         </div>
-      </div>
+      </nav>
     {% endblock %}
     {% block body %}
-
+		{% for label, messages in app.flashes %}
+			{% for message in messages %}
+				<div class="alert {{label}}">
+					<input type="checkbox" id="alert2"/>
+					<label class="close" title="close" for="alert2">
+				<i class="icon-remove"></i>
+				</label>
+					<p class="inner">
+						{{ message }}
+					</p>
+				</div>
+			{% endfor %}
+		{% endfor %}
+		{% block container %}{%	endblock %}
     {% endblock %}
   </body>
 </html>

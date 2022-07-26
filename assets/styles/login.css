@@ -11,9 +11,9 @@
     margin: 40px auto;
     font-family: "Segoe UI", sans-serif;
     padding: 25px 28px;
-    background: #151414;
+    background: aliceblue;
     border-radius: 4px;
-    border: 1px solid #302d2d;
+    border: 1px solid aliceblue;
     animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 @keyframes popup {
@@ -31,7 +31,7 @@ h2 {
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: 400;
-    color: #e7e7e7;
+    color: black;
 }
 .input-parent {
     display: block;
@@ -47,15 +47,13 @@ label {
     padding: 10px 8px;
     width: 100%;
     font-size: 16px;
-    background: #323131;
     border: none;
-    color: #c7c7c7;
     border-radius: 4px;
     outline: none;
     transition: all 0.2s ease;
 }
 .input-parent input:hover {
-    background: #404040;
+    background:whitesmoke;
 }
 .input-parent input:focus {
     box-shadow: 0px 0px 0px 1px #0087ff;
@@ -77,5 +75,5 @@ button:focus {
     box-shadow: 0px 0px 0px 3px black;
 }
 body {
-    background: #1c1b1b;
+    background: #fff;
 }

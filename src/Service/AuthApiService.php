@@ -3,8 +3,6 @@
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class AuthApiService
@@ -20,7 +18,7 @@ class AuthApiService
         $this->requestStack = $requestStack;
     }
 
-    public function getToken($data): bool
+    public function login($data): bool
     {
         $session = $this->requestStack->getSession();
 
@@ -36,6 +34,7 @@ class AuthApiService
         );
         if ($response->getStatusCode() === 200) {
             $session->set('token', $response->toArray()['token']);
+            $session->set('username',  $data['username']);
 
             return true;
         }

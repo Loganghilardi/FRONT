@@ -16,6 +16,6 @@ class LoginType extends AbstractType
     ): void {
         $builder
             ->add('username', TextType::class, ['label' => 'E-mail :'])
-            ->add('password', TextType::class, ['label' => 'Mot de passe :']);
+            ->add('password', PasswordType::class, ['label' => 'Mot de passe :']);
     }
 }

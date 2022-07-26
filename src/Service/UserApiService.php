@@ -30,7 +30,7 @@ class UserApiService
 
         $response = $this->client->request(
             'GET',
-            'http://127.0.0.1:8000/api/users',
+            'https://ouiquit-api.herokuapp.com/api/users',
             ['headers' => $header]
         );
 

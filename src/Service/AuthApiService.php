@@ -24,7 +24,7 @@ class AuthApiService
 
         $response = $this->client->request(
             'POST',
-            'http://127.0.0.1:8000/api/login',
+            'https://ouiquit-api.herokuapp.com/api/login',
             [
                 'json' => [
                     'email' => $data['username'],

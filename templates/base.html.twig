@@ -12,9 +12,11 @@
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
       	{{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('table') }}
 		{{ encore_entry_link_tags('navbar') }}
 		{{ encore_entry_link_tags('alerts') }}
     {% endblock %}
+{% set userLogged = app.session.get('userLogged') %}
 
     {% block javascripts %}
       {{ encore_entry_script_tags('app') }}
@@ -33,7 +35,7 @@
                 	<a href="{{ path('users') }}">Utilisateurs</a>
                 </li>
                 <li>
-                  <p> {{ app.session.get('username') }}</p>
+                  <a> {{ userLogged.firstName }}</a>
                 </li>
                 <li>
                   <a href="{{ path('logout') }}">Déconnexion</a>

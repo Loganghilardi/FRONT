@@ -35,11 +35,38 @@ class AuthApiService
         if ($response->getStatusCode() === 200) {
             $session->set('token', $response->toArray()['token']);
             $session->set('username',  $data['username']);
-
+            $test = $this->getUserLogged($data['username']);
+            if (in_array('ROLE_ADMIN', $test['roles']))
+            {
+                dd('has admin');
+            } else {
+                dd( $response->toArray()['token']);
+            }
+            $session->set('userLogged', $test);
+            
             return true;
         }
 
         return false;
+    }
+
+    public function getUserLogged(string $userIdentifier): array
+    {
+        $session = $this->requestStack->getSession();
+
+        $token = $session->get('token');
+        $header = [
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ];
+
+        $response = $this->client->request(
+            'GET',
+            'https://ouiquit-api.herokuapp.com/api/users?email=' . $userIdentifier,
+            ['headers' => $header]
+        );
+
+        return $response->toArray()[0];
     }
 
     public function logout(): void

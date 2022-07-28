@@ -1,19 +1,43 @@
 {% extends 'base.html.twig' %}
-
+{% set userLogged = app.session.get('userLogged') %}
 {% block title %}
-  OuiQuit - Utilisateurs
+	OuiQuit - Utilisateurs
 {% endblock %}
 
 {% block container %}
-  <div class="container">
-    <h1>
-      Liste des utilisateurs
-    </h1>
-    {% for user in users %}
-      <p>
-        {{ user.email }}
-      </p>
-      <p> {{ user.id }} {{ user.roles[0] }} </p>
-    {% endfor %}
-  </div>
+	<div class="container">
+		<h1>
+			Liste des utilisateurs
+		</h1>
+		<button><a href="{{ path('create_user') }}">Ajouter un user</a></button>
+
+		<table cellspacing="0">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nom Prénom</th>
+					<th>Email</th>
+					<th>Créer le</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.lastName }} {{ user.firstName }}</td>
+						<td>{{ user.email }}</td>
+						<td>{{ user.creationDate }}</td>
+						<td>
+						{% if user.id is not same as userLogged.id %}
+							<a href="{{ path('delete_user', {'id': user.id }) }}" onclick="return confirm('Vous êtes sur de vouloir supprimer cet utilisateur ?')">Supprimer cet utilisateur</a>
+							<a href="{{ path('update_user', {'id': user.id }) }}">Modifier cet utilisateur</a>
+
+						{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

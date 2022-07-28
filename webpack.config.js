@@ -24,6 +24,7 @@ Encore
     .addEntry('login', './assets/login.js')
     .addEntry('navbar', './assets/navbar.js')
     .addEntry('alerts', './assets/alerts.js')
+    .addEntry('table', './assets/table.js')
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)

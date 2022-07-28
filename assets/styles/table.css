@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+    border: 2px black solid;
+    border-radius: 10px;
+}
+
+
+th {
+    background-color: lightcyan;
+    height: 50px;
+}
+
+td {
+    text-align: center;
+    height: 30px;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+
+}

@@ -1,2 +1,2 @@
-release: php bin/console build
+release: npm run build
 web: heroku-php-apache2 public/

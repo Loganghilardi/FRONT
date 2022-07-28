@@ -36,11 +36,9 @@ class AuthApiService
             $session->set('token', $response->toArray()['token']);
             $session->set('username',  $data['username']);
             $test = $this->getUserLogged($data['username']);
-            if (in_array('ROLE_ADMIN', $test['roles']))
+            if (!in_array('ROLE_ADMIN', $test['roles']))
             {
-                dd('has admin');
-            } else {
-                dd( $response->toArray()['token']);
+                return false;
             }
             $session->set('userLogged', $test);
             

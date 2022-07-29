@@ -52,7 +52,7 @@ class UserController extends AbstractController
         if (!$isLogged) {
             $this->addFlash(
                 'error',
-                'connecte toi hmar'
+                'Connexion requise'
             );
 
             return $this->redirectToRoute('login');
